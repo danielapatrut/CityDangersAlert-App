@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CityDangersAlert-App</string>
+    <string name="register_password">password</string>
+    <string name="register_email">email</string>
+    <string name="register_confirmPassword">confirm password</string>
+    <string name="register_Name">Last Name</string>
+    <string name="register_FirstName">First Name</string>
+    <string name="register_address">Street Address</string>
+    <string name="register_phone">##########</string>
 </resources>
