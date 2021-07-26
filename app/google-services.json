@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "345147070348",
+    "project_id": "citydangersalert-app-5bb63",
+    "storage_bucket": "citydangersalert-app-5bb63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345147070348:android:02c25c993958b02502e8a9",
+        "android_client_info": {
+          "package_name": "com.example.citydangersalert_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345147070348-roj0vv2seo0bs36p1v8bbvkf80tnmi84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYzv6QHOGnC5X_mVVhosl1faFQUWEazLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345147070348-roj0vv2seo0bs36p1v8bbvkf80tnmi84.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
