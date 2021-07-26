@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "202185914224",
+    "firebase_url": "https://citydangersalert-app-default-rtdb.firebaseio.com",
+    "project_id": "citydangersalert-app",
+    "storage_bucket": "citydangersalert-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202185914224:android:07d39c4988c4a052fb41b5",
+        "android_client_info": {
+          "package_name": "com.example.citydangersalert_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202185914224-3a70pj00gtlelpam28isbtndqe7mg18p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW8xFXJmwpIYnWwsWClgSLBuOhXm1tIzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202185914224-3a70pj00gtlelpam28isbtndqe7mg18p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
