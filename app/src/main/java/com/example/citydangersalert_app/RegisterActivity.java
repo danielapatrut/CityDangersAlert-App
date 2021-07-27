@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button mRegisterBtn;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,19 +76,22 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
-                            Toast.makeText(RegisterActivity.this, "User created", Toast.LENGTH_SHORT).show();
-                           /* userID = fAuth.getCurrentUser().getUid();
+                            //Toast.makeText(RegisterActivity.this, "User created", Toast.LENGTH_SHORT).show();
+                            userID = fAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = fStore.collection("users").document(userID);
                             Map<String,Object> user = new HashMap<>();
-                            user.put("userName", userName);
+                            user.put("firstName", firstName);
+                            user.put("lastName", lastName);
+                            user.put("address", address);
+                            user.put("phone", phone);
                             user.put("email", email);
                             user.put("password", password);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Log.d("TAG","onSuccess: user profile is created for " + userID);
+                                    Log.d("TAG","onSuccess: User profile is created for " + userID);
                                 }
-                            });*/
+                            });
                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                             finish();
                         }
