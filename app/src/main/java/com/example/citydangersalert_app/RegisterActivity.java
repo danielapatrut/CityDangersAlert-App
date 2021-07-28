@@ -63,7 +63,15 @@ public class RegisterActivity extends AppCompatActivity {
                 String address = mAddress.getText().toString().trim();
                 String phone = mPhone.getText().toString().trim();
 
+                if (RegisterUtils.checkEmptyFirstName(mFirstName, firstName)) return;
+
+                if (RegisterUtils.checkEmptyLastName(mLastName, lastName)) return;
+
+                if (RegisterUtils.checkEmptyAdress(mAddress, address)) return;
+
                 if (RegisterUtils.checkEmptyEmail(mEmail, email)) return;
+
+                if (RegisterUtils.checkEmptyPhone(mPhone, phone)) return;
 
                 if (RegisterUtils.checkEmptyPassword(mPassword, password)) return;
 
