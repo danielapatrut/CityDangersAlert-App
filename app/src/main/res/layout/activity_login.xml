@@ -93,29 +93,23 @@
         android:id="@+id/textView6"
         android:layout_width="288dp"
         android:layout_height="51dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:gravity="center|center_horizontal"
         android:text="City Dangers Alert"
+        android:textColor="#5E5959"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="45dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_alert" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
         android:layout_width="36dp"
         android:layout_height="42dp"
-        app:constraint_referenced_ids="imageView,textView6" />
+        app:constraint_referenced_ids="textView6" />
 </androidx.constraintlayout.widget.ConstraintLayout>
