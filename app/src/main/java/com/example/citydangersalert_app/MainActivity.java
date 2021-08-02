@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mBackBtn = findViewById(R.id.backButton);
+       /* mBackBtn = findViewById(R.id.backButton);
 
         mBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,6 +24,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             }
         });
-
+        */
     }
 }
