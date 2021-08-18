@@ -47,10 +47,12 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
 
+    //Button mlogout;
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
     private GoogleMap mMap;
@@ -60,19 +62,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker currentUserLocationMarker;
     private static final int Request_User_Location_Code = 99;
 
-import com.google.firebase.auth.FirebaseAuth;
-
-public class MainActivity extends AppCompatActivity {
-
-    //Button mlogout;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
@@ -93,16 +86,7 @@ public class MainActivity extends AppCompatActivity {
         */
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         supportMapFragment.getMapAsync(this::onMapReady);
-        /*client = LocationServices.getFusedLocationProviderClient(this);
 
-        if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
-            getCurrentLocation();
-        }else{
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-        }*/
     }
 
     @Override
@@ -238,147 +222,5 @@ public class MainActivity extends AppCompatActivity {
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-    /*
-    private void getCurrentLocation() {
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-
-        Task<Location> task = client.getLastLocation();
-
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-
-                if(location != null)
-                {
-                    System.out.println("YES");
-                    supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-                        @Override
-                        public void onMapReady(@NonNull GoogleMap googleMap) {
-
-                            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                            MarkerOptions options = new MarkerOptions().position(latLng).title("I am here");
-
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
-                            googleMap.addMarker(options);
-                        }
-                    });
-                }else{
-                    System.out.println("NOOOOOOOO");
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 44) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getCurrentLocation();
-            }
-        }
-    }
-
-
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-
-    }
-
-
-    private void getCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-
-                if(location != null) {
-                    supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-                        @Override
-                        public void onMapReady(@NonNull GoogleMap googleMap) {
-                            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-
-                            MarkerOptions markerOptions = new MarkerOptions().position(latLng);
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
-                            googleMap.addMarker(markerOptions);
-                        }
-                    });
-
-                }
-            }
-        });
-    }
-
-    private void fetchLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-           ActivityCompat.requestPermissions(this, new String[]{
-                   Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
-            return;
-        }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if(location != null) {
-                    currentLocation = location;
-                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude()
-                    + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
-
-                    supportMapFragment.getMapAsync(MainActivity.this);
-                }
-
-            }
-        });
-    }
-
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        LatLng latLng = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng);
-
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        //googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,18);
-        googleMap.addMarker(markerOptions);
-        googleMap.moveCamera(cameraUpdate);
-        googleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                fetchLastLocation();
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 44) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getCurrentLocation();
-            }
-        }
-
-    }
-    */
 }
