@@ -21,7 +21,6 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.common.api.GoogleApi;
@@ -61,10 +60,18 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker currentUserLocationMarker;
     private static final int Request_User_Location_Code = 99;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+public class MainActivity extends AppCompatActivity {
+
+    //Button mlogout;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -73,9 +80,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
        /* mBackBtn = findViewById(R.id.backButton);
 
-        mBackBtn.setOnClickListener(new View.OnClickListener() {
+        mlogout = findViewById(R.id.backButton);
+
+
+        mlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             }
         });

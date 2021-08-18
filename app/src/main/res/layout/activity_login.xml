@@ -89,6 +89,8 @@
         app:layout_constraintStart_toStartOf="@+id/view2"
         app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
+
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="288dp"
@@ -112,4 +114,18 @@
         android:layout_width="36dp"
         android:layout_height="42dp"
         app:constraint_referenced_ids="textView6" />
+
+    <TextView
+        android:id="@+id/forgotPassword"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="188dp"
+        android:layout_marginRight="188dp"
+        android:text="Forgot password"
+        android:textColor="#8C307C"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

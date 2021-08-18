@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CityDangersAlertApp.NoActionBar">
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
@@ -27,6 +26,9 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+
+        <activity android:name=".ForgotPasswordActivity"></activity>
 
         <activity android:name=".LandingActivity">
             <intent-filter>
@@ -45,6 +47,7 @@
         </activity>
         <!-- <activity android:name=".RegisterActivity" /> -->
         <!-- <activity android:name=".MainActivity" /> -->
+
         <activity android:name=".RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
