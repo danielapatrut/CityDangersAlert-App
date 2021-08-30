@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CityDangersAlertApp.NoActionBar">
+        <activity android:name=".MainActivity2"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -27,9 +28,7 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-
-        <activity android:name=".ForgotPasswordActivity"></activity>
-
+        <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".LandingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,17 +36,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- <activity android:name=".RegisterActivity" /> -->
+        </activity> <!-- <activity android:name=".RegisterActivity" /> -->
         <!-- <activity android:name=".MainActivity" /> -->
-
         <activity android:name=".RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

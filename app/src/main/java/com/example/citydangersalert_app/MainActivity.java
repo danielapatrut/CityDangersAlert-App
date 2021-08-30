@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
@@ -18,8 +20,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
@@ -41,6 +45,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -48,11 +53,16 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 import com.google.firebase.auth.FirebaseAuth;
-
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
 
+
     //Button mlogout;
+    Button mMenuButton;
+    private FrameLayout mFrameLayout;
+    private DrawerLayout mDrawer;
+    private NavigationView nvDrawer;
+    Button closemenu;
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
     private GoogleMap mMap;
@@ -66,6 +76,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mMenuButton = findViewById(R.id.menuButton);
+        mFrameLayout = findViewById(R.id.mainViewMaps);
+        mDrawer = findViewById(R.id.drawer_layout);
+        nvDrawer = findViewById(R.id.nvView);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
@@ -87,6 +102,76 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         supportMapFragment.getMapAsync(this::onMapReady);
 
+        mMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open menu
+                mDrawer.openDrawer(GravityCompat.START);
+            }
+        });
+
+        setupDrawerContent(nvDrawer);
+        View header = nvDrawer.getHeaderView(0);
+        closemenu = (Button) header.findViewById(R.id.dismissbutton);
+        closemenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawer.closeDrawers();
+            }
+        });
+
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.nav_home:
+                fragmentClass = MainActivity.class;
+                break;
+           /* case R.id.nav_gallery:
+                fragmentClass = GalleryActivity.class;
+                break;
+            case R.id.nav_profile:
+                fragmentClass = MyProfileActivity.class;
+                break;
+            case R.id.nav_settings:
+                fragmentClass = SettingsActivity.class;
+                break;*/
+            case R.id.nav_logout:
+                fragmentClass=LoginActivity.class;
+                logout();
+                break;
+            default:
+                fragmentClass = MainActivity.class;
+        }
+
+        startActivity(new Intent(getApplicationContext(),fragmentClass));
+
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        mDrawer.closeDrawers();
+    }
+
+    public void logout()
+    {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+        finish();
     }
 
     @Override
